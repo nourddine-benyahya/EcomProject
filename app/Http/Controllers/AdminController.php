@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ProductExport;
+use App\Imports\ProductImport;
 use PDF;
 use App\Models\Order;
 use App\Models\Product;
 // use Barryvdh\DomPDF\PDF;
 use App\Models\Category;
+use App\Models\User;
 // use Illuminate\Notifications\Notification;
 // use Illuminate\Http\UploadedFile;
 use Illuminate\Http\Request;
@@ -66,6 +68,16 @@ class AdminController extends Controller
 
     }
 
+    public function delete_user($id){
+
+        $data = User::findOrfail($id);
+ 
+        $data->delete();
+ 
+        return redirect()->back()->with('message','user deleted successfuly');
+ 
+     }
+
     public function view_product(){
 
         if(Auth::id()){
@@ -91,7 +103,13 @@ class AdminController extends Controller
     }
     public function export() 
     {
-        return Excel::download(new ProductExport, 'users.xlsx');
+        return Excel::download(new ProductExport, 'product.xlsx');
+    }
+    public function import(Request $request) 
+    {
+        Excel::import(new ProductImport, $request->file);
+        
+        return redirect('/show_product')->with('success', 'All good!');
     }
 
     public function add_product(Request $request){
@@ -105,10 +123,10 @@ class AdminController extends Controller
         $product->price = $request->price;
         $product->discount_price = $request->dis_price;
 
- //       $image = $request->image;
-   //     $imagename = time().'.'.$image->getClientOriginalExtension();
-       // $request->image->move('product', $imagename);
-     //   $product->image = "app/product/".$imagename;
+        //$image = $request->image;
+        //$imagename = time().'.'.$image->getClientOriginalExtension();
+        //$request->image->move('product', $imagename);
+        //$product->image = "app/product/".$imagename;
         //$product->save();
 
         $ext = request()->image->getClientOriginalExtension();;
@@ -129,9 +147,10 @@ public function show_product(){
     if(Auth::id()){
                 if(Auth::user()->usertybe == 1){
 
+                    $category = Category::all();
                     $product = Product::all();
 
-                    return view('admin.show_product',compact('product'));
+                    return view('admin.show_product',compact('product','category'));
 
                 }else{
 
@@ -144,6 +163,31 @@ public function show_product(){
         }
 
     }
+
+
+
+    public function show_client(){
+
+        if(Auth::id()){
+                    if(Auth::user()->usertybe == 1){
+    
+                        $clients = User::where('usertybe', 0)->get();
+    
+                        return view('admin.show_client',compact('clients'));
+    
+                    }else{
+    
+                        return redirect()->back();
+    
+                    }
+        }
+        else{
+            return redirect('login');
+            }
+    
+        }
+
+
 
     public function delete_product($id){
 
@@ -163,6 +207,40 @@ public function show_product(){
         return view('admin.update_product',compact('product','category'));
     }
 
+    public function update_client($id){
+
+        $client = User::find($id);
+
+
+        return view('admin.update_client',compact('client'));
+    }
+
+
+    public function update_client_confirm(Request $request , $id){
+
+        $client = User::find($id);
+ 
+        $client->name = $request->name;
+        $client->email = $request->email;
+        $client->phone = $request->phone;
+        $client->address = $request->address;
+   
+ 
+        $client->save();
+ 
+        return redirect()->back()->with('message','client Updated successfuly');
+ 
+     }
+
+
+    public function update_category($id){
+
+        $category = Category::find($id);
+
+
+        return view('admin.update_category',compact('category'));
+    }
+
     public function update_product_confirm(Request $request , $id){
 
        $product = Product::find($id);
@@ -177,8 +255,11 @@ public function show_product(){
 
        $image = $request->image;
         if($image){
-
-            $product->image = Storage::putFile('product',$image);
+            
+            $ext = request()->image->getClientOriginalExtension();;
+            $name = time().".".$ext;
+            request()->image->move(public_path('storage'),$name);
+            $product->image = $name;
         }
 
        $product->save();
@@ -186,6 +267,20 @@ public function show_product(){
        return redirect()->back()->with('message','Product Updated successfuly');
 
     }
+
+
+    public function update_category_confirm(Request $request , $id){
+
+        $category = Category::find($id);
+ 
+        $category->category_name = $request->name;
+  
+ 
+        $category->save();
+ 
+        return redirect()->back()->with('message','Category Updated successfuly');
+ 
+     }
 
     public function order(){
         if(Auth::id()){
@@ -239,18 +334,19 @@ public function show_product(){
         return view('admin.send_info',compact('order'));
     }
 
+    public function send_email2($id){
+
+        $user = User::find($id);
+ 
+         return view('admin.send_info_user',compact('user'));
+     }
+
     public function send_user_email(Request $request , $id){
 
        $order = Order::find($id);
 
        $details = [
-
-        'greeting' => $request->greeting ,
-        'firstline' => $request->firstline ,
         'body' => $request->body ,
-        'button' => $request->button ,
-        'url' => $request->url ,
-        'lastline' => $request->lastline ,
        ];
 
        Notification::send($order,new SendEmailNotification($details));
@@ -258,6 +354,20 @@ public function show_product(){
        return redirect()->back();
 
     }
+
+    public function send_user2_email(Request $request , $id){
+
+        $user = User::find($id);
+ 
+        $details = [
+         'body' => $request->body ,
+        ];
+ 
+        Notification::send($user,new SendEmailNotification($details));
+ 
+        return redirect()->back();
+ 
+     }
 
     public function searchdata(Request $request){
 

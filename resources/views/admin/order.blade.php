@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
 
-   @include('admin.css')
 
    <style>
    .title_deg{
@@ -22,8 +21,8 @@
 
    }
    .img_size{
-    width: 200px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
    }
 
 </style>
@@ -32,12 +31,10 @@
   <body>
     <div class="container-scroller">
 
-      <!-- partial:partials/_sidebar.html -->
-      @include('admin.sidebar')
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_navbar.html -->
-      @include('admin.header')
+      @include('admin.AdminDashboard')
         <!-- partial -->
 
         <div class="main-panel">
@@ -48,38 +45,35 @@
 
                 <div style="text-align: center; padding-bottom:30px;">
 
-                    <form action="{{url('search')}}" method="GET">
-                        @csrf
-
-                        <input type="text" name="search" placeholder="Search For Something" style="color: black">
-                        <input type="submit" value="Search" class="btn btn-outline-primary">
-
-                    </form>
                 </div>
 
-                <table class="table_deg">
-
-                    <tr class="th_deg">
-
-                        <th style="padding: 10px">Name</th>
-                        <th style="padding: 10px">Email</th>
-                        <th style="padding: 10px">Address</th>
-                        <th style="padding: 10px">Phone</th>
-                        <th style="padding: 10px">Product Title</th>
-                        <th style="padding: 10px">Quantity</th>
-                        <th style="padding: 10px">Price</th>
-                        <th style="padding: 10px">Payment Status</th>
-                        <th style="padding: 10px">Delivery Status</th>
-                        <th style="padding: 10px">image</th>
-                        <th style="padding: 10px">Delivered</th>
-                        <th style="padding: 10px">Print PDF</th>
-                        <th style="padding: 10px">Send Email</th>
-                    </tr>
-
-                    @forelse ($order as $order )
+      
 
 
+
+                <table class="table table-bordered table-striped data-table1" style="min-width: 100%">
+                    <thead style="font-size: 10px" >
+                      <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Product Title</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Delivery Status</th>
+                        <th>Print PDF</th>
+                        <th>Send Email</th>
+                      </tr>
+                    </thead>
+                    <tbody style="font-size: 11px">
+                    @foreach($order as $order )
+                       
                     <tr>
+                        <td>
+                            <img class="img_size"  src="{{asset("storage/$order->image")}}" alt="" >
+                        </td>
                         <td>{{$order->name}}</td>
                         <td>{{$order->email}}</td>
                         <td>{{$order->address}}</td>
@@ -87,20 +81,15 @@
                         <td>{{$order->product_title}}</td>
                         <td>{{$order->quantity}}</td>
                         <td>{{$order->price}}</td>
-                        <td>{{$order->payment_status}}</td>
-                        <td>{{$order->delivery_status}}</td>
-                        <td>
-                            <img class="img_size" src="{{asset("storage/$order->image")}}" alt="" >
-                        </td>
 
                         <td>
-                            @if ($order->delivery_status == 'processing')
+                            @if($order->delivery_status == 'processing')
 
-                            <a href="{{url('delivered',$order->id)}}" class="btn btn-primary" onclick="return confirm('Are you sure this product is delivered !!!')">Delivered</a>
+                            <a href="{{url('delivered',$order->id)}}" class="btn btn-primary"  style="font-size: 11px ; padding:5% 10%" onclick="return confirm('Are you sure this product is delivered !!!')">processing</a>
 
                             @else
 
-                            <p style="color: green;">Deliverd</p>
+                            <p style="color: green; font-size: 11px"  >Deliverd</p>
 
                             @endif
 
@@ -108,25 +97,18 @@
 
                         <td>
 
-                            <a href="{{url('print_pdf',$order->id)}}}" class="btn btn-secondary">Print PDF</a>
+                            <a href="{{url('print_pdf',$order->id)}}}" class="btn btn-secondary" style="font-size: 11px ; padding:5% 10%" >Print PDF</a>
                         </td>
 
                         <td>
-                            <a href="{{url('send_email',$order->id)}}" class="btn btn-info">Send Email</a>
+                            <a href="{{url('send_email',$order->id)}}" class="btn btn-info" style="font-size: 11px ; padding:5% 10%">Send Email</a>
                         </td>
                     </tr>
 
-                    @empty
-
-                    <tr>
-
-                        <td colspan="16">
-                            NO DATA FOUND!!
-                        </td>
-                    </tr>
-
-                    @endforelse
-                </table>
+                    @endforeach
+          
+                    </tbody>
+                  </table>
 
             </div>
 
@@ -135,5 +117,9 @@
     <!-- plugins:js -->
 
     @include('admin.script')
+</main>
+
+
 </body>
+
 </html>

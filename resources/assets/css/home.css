@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  header p {
+    margin: 0;
+    font-size: 20px;
+  }
+  .btn {
+    background-color: #fff;
+    border: none;
+    color: #1E90FF;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+  }
+  .btn:hover {
+    background-color: #1E90FF;
+    color: #fff;
+  }
+  .container {
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+  .section-1 {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .section-1 h2 {
+    margin-top: 0;
+    font-size: 36px;
+    font-weight: bold;
+    color: #1E90FF;
+    text-shadow: 1px 1px 0 #fff;
+  }
+  .section-1 p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 20px 0;
+    color: #444;
+    max-width: 800px;
+    text-align: justify;
+
+  }
+  .section-1 .btn {
+    font-size: 16px;
+    padding: 12px 24px;
+    background-color: #1E90FF;
+    color: #fff;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+  .section-1 .btn:hover {
+    background-color: #fff;
+    color: #1E90FF;
+  }
+  .section-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+  .section-2 img {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    border-radius: 4px;
+  }
+  footer {
+    background-color: #ddd;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 12px;
+    color: #888;
+    position: absolute; /* set the footer element to absolute position */
+    bottom: 0; /* fix the footer to the bottom */
+    width: 100%; /* set the width to 100% to fill the entire width of the page */
+  }
+  .logo{
+    width: 50px;
+          }
+          .slider {
+            display: flex;
+            overflow: hidden;
+            width: 60%;
+            border-radius: 20px;
+          }
+          
+          .slider img {
+            width: 100%;
+            margin: auto;
+            height: auto;
+            -webkit-animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+          }
+          
+
+
+@keyframes slide-left {
+0% {
+          transform: translateX(100%);
+}
+100% {
+          transform: translateX(0);
+}
+}
+
+a{
+text-decoration: none;
+}

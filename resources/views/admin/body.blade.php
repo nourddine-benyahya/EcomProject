@@ -1,143 +1,156 @@
-<div class="main-panel">
-    <div class="content-wrapper">
-
-      <div class="row">
-        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-9">
-                  <div class="d-flex align-items-center align-self-start">
-                    <h3 class="mb-0">{{$total_products}}</h3>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="icon icon-box-success ">
-                    <span class="mdi mdi-arrow-top-right icon-item"></span>
-                  </div>
-                </div>
-              </div>
-              <h6 class="text-muted font-weight-normal">Total Products</h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-9">
-                  <div class="d-flex align-items-center align-self-start">
-                    <h3 class="mb-0">{{$total_orders}}</h3>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="icon icon-box-success">
-                    <span class="mdi mdi-arrow-top-right icon-item"></span>
-                  </div>
-                </div>
-              </div>
-              <h6 class="text-muted font-weight-normal">Total Orders</h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-9">
-                  <div class="d-flex align-items-center align-self-start">
-                    <h3 class="mb-0">{{$total_users}}</h3>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="icon icon-box-danger">
-                    <span class="mdi mdi-arrow-bottom-left icon-item"></span>
-                  </div>
-                </div>
-              </div>
-              <h6 class="text-muted font-weight-normal">Total Customers</h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-9">
-                  <div class="d-flex align-items-center align-self-start">
-                    <h3 class="mb-0">${{$total_revenue}}</h3>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="icon icon-box-success ">
-                    <span class="mdi mdi-arrow-top-right icon-item"></span>
-                  </div>
-                </div>
-              </div>
-              <h6 class="text-muted font-weight-normal">Total Revenue</h6>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-9">
-                    <div class="d-flex align-items-center align-self-start">
-                      <h3 class="mb-0">{{$total_delivered}}</h3>
-                    </div>
-                  </div>
-                  <div class="col-3">
-                    <div class="icon icon-box-success ">
-                      <span class="mdi mdi-arrow-top-right icon-item"></span>
-                    </div>
-                  </div>
-                </div>
-                <h6 class="text-muted font-weight-normal">Order Delivered</h6>
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Product
+                </p>
+                <h5 class="font-weight-bolder mb-0">
+                  {{$total_products}}
+                </h5>
               </div>
             </div>
-          </div>
-
-          <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-9">
-                    <div class="d-flex align-items-center align-self-start">
-                      <h3 class="mb-0">{{$total_processing}}</h3>
-                    </div>
-                  </div>
-                  <div class="col-3">
-                    <div class="icon icon-box-success ">
-                      <span class="mdi mdi-arrow-top-right icon-item"></span>
-                    </div>
-                  </div>
-                </div>
-                <h6 class="text-muted font-weight-normal">Order Processing</h6>
-              </div>
-            </div>
-          </div>
-
-      </div>
-
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"><img style="width: 80%;  margin-top: -10px;" src="../../assets//img/brand.png" alt=""></i>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- content-wrapper ends -->
-    <!-- partial:partials/_footer.html -->
-    <footer class="footer">
-      <div class="d-sm-flex justify-content-center justify-content-sm-between">
-        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>
-        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Orders</p>
+                <h5 class="font-weight-bolder mb-0">
+                  {{ $total_orders}}
+                </h5>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                <i class="ni ni-world text-lg opacity-10" aria-hidden="true"><img style="width: 70%; margin-top: -10px;" src="../../assets//img/influ.png" alt=""></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </footer>
-    <!-- partial -->
+    </div>
+
+
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Revenue</p>
+                <h5 class="font-weight-bolder mb-0">
+                 $ {{ $total_revenue}}
+                </h5>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                <i class="ni ni-world text-lg opacity-10" aria-hidden="true"><img style="width: 70%; margin-top: -10px;" src="../../assets//img/influ.png" alt=""></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Users</p>
+                <h5 class="font-weight-bolder mb-0">
+                  {{ $total_users}}
+                </h5>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"><img style="width: 70%; margin-top: -10px;" src="../../assets//img/Contract.png" alt=""></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6" style="margin-top: 2%">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Orders processing</p>
+                <h5 class="font-weight-bolder mb-0">
+                  {{ $total_processing}}
+                </h5>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"><img style="width: 80%; margin-top: -10px;" src="../../assets/img/del.png" alt=""></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-sm-6" style="margin-top: 2%">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Orders Delivered</p>
+                <h5 class="font-weight-bolder mb-0">
+                  {{ $total_delivered}}
+                </h5>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"><img style="width: 80%; margin-top: -10px;" src="../../assets/img/del.png" alt=""></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- main-panel ends -->
+
+
+
+
 </div>
-<!-- page-body-wrapper ends -->
-</div>
+
+</main>
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+

@@ -22,7 +22,7 @@ class HomeController extends Controller
 
        $product = Product::paginate(6);
 
-        return view('home.userpage',compact('product'));
+            return view('home.userpage',compact('product'));
     }
     public function redirect(){
 

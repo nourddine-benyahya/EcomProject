@@ -4,7 +4,6 @@
 
     {{-- <base href="/public"> --}}
 
-   @include('admin.css')
 
    <style type="text/css">
 
@@ -35,30 +34,12 @@
   </head>
   <body>
     <div class="container-scroller">
-      <div class="row p-0 m-0 proBanner" id="proBanner">
-        <div class="col-md-12 p-0 m-0">
-          <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
-            <div class="ps-lg-1">
-              <div class="d-flex align-items-center justify-content-between">
-                <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
-                <a href="https://www.bootstrapdash.com/product/corona-free/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
-              </div>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-              <a href="https://www.bootstrapdash.com/product/corona-free/"><i class="mdi mdi-home me-3 text-white"></i></a>
-              <button id="bannerClose" class="btn border-0 p-0">
-                <i class="mdi mdi-close text-white me-0"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+
       <!-- partial:partials/_sidebar.html -->
-      @include('admin.sidebar')
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_navbar.html -->
-      @include('admin.header')
+      @include('admin.AdminDashboard')
         <!-- partial -->
 
         <div class="main-panel">
@@ -78,67 +59,53 @@
                 @endif
 
 
-                <div class="div_center">
+                <div >
                     <h1 class="h1_font">Update product</h1>
-
                     <form action="{{url('update_product_confirm',$product->id)}}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      <div class="form-row" style="display: flex; row-gap:50px;">
+                        <div class="form-group col-md-6">
+                          <label for="inputEmail4">product name</label>
+                          <input type="text" name="title" class="form-control" id="inputEmail4" placeholder="Product Name"  value="{{$product->title}}">
+                        </div>
+                        <div class="form-group col-md-6" style="margin-left: 20px;" >
+                          <label for="inputPassword4">product Price</label>
+                          <input type="number" name="dis_price" class="form-control" id="inputPassword4" placeholder="Price" value="{{$product->price}}">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputAddress">product description</label>
+                        <input type="text" name="description" class="form-control" id="inputAddress" placeholder="description" value="{{$product->description}}">
+                      </div>
 
-                        @csrf
 
-                    <div class="div_design">
-                    <label for="">product title :</label>
-                    <input class="text_color" type="text" name="title" placeholder="Write a title" required="" value="{{$product->title}}">
-                    </div>
+                      <div class="form-row" style="display: flex; row-gap:50px;">
+                          <div class="form-group col-md-6">
+                            <label for="inputEmail4">product quantity</label>
+                            <input type="Number" name="quantity" class="form-control" id="inputEmail4" placeholder="Product Name" value="{{$product->quantity}}">
+                          </div>
+                          <div class="form-group col-md-4" style="margin-left: 20px;">
+                              <label for="inputState">State</label>
+                              <select id="inputState" name="category" class="form-control">
+                                <option value="{{$product->category}}" selected="">{{$product->category}}</option>
+                                  @foreach ($category as $category )
+                                  <option value="{{$category->category_name}}">{{$category->category_name}}</option>
 
-                    <div class="div_design">
-                    <label for="">product description :</label>
-                    <input class="text_color" type="text" name="description" placeholder="Write a description" required="" value="{{$product->description}}">
-                    </div>
+                                  @endforeach
 
-                    <div class="div_design">
-                    <label for="">product price :</label>
-                    <input class="text_color" type="number" name="price" placeholder="Write a price" required="" value="{{$product->price}}">
-                    </div>
-
-                    <div class="div_design">
-                     <label for="">Discount Price :</label>
-                     <input class="text_color" type="number" name="dis_price" placeholder="Write a discount " value="{{$product->discount_price}}">
-                     </div>
-
-                    <div class="div_design">
-                    <label for="">product quantity :</label>
-                    <input class="text_color" type="number" min="0" name="quantity" placeholder="Write a quantity" required="" value="{{$product->quantity}}">
-                    </div>
-
-                    <div class="div_design">
-                    <label for="">product category :</label>
-                    <select class="text_color" name="category" id="" required="">
-                    <option value="{{$product->category}}" selected="">{{$product->category}}</option>
-
-                    @foreach ($category as $category )
-
-                    <option value="{{$category->category_name}}">{{$category->category_name}}</option>
-
-                    @endforeach
-
-                    </select>
-                    </div>
-
-                    <div class="div_design">
-                        <label for="">Change Product iamge :</label>
-                        <img style="margin:auto;" src="{{asset("storage/$product->image")}}" width="100" height="100" alt="">
+                              </select>
+                          </div>
                         </div>
 
-                    <div class="div_design">
-                    <label for="">Change Product iamge :</label>
-                    <input  type="file" name="image">
-                    </div>
+                        <div class="form-group">
+                          <label for="inputAddress">Product Image</label>
+                          <input type="file" name="image" class="form-control" id="inputAddress">
+                        </div>
 
-                    <div class="div_design">
-                    <input type="submit" value="Update Product" class="btn btn-primary">
-                    </div>
+                      <button type="submit" class="btn btn-primary">Update Product</button>
+                    </form> 
 
-                    </form>
+
 
                 </div>
 
@@ -152,7 +119,12 @@
     <!-- plugins:js -->
 
     @include('admin.script')
+
+
+
+</main>
+
+
 </body>
+
 </html>
-
-

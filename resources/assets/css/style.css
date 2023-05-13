@@ -1,0 +1,156 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 0 -10px; /* add negative margin to offset horizontal padding */
+  }
+  
+  
+  
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .cards .item {
+      width: calc(50% - 20px); /* calculate width for 2 items in a row with 10px padding on each side */
+      margin-top: 20px;
+    }
+  }
+
+  .img{width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  text-align: center;
+  }
+
+  .contact-button{
+    background-color: #fff;
+    outline: none;
+    border: none;
+    font-size: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .contact-button:active{
+    transform: scale(0.95);
+
+  }
+  
+
+  .contrat-info {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+  }
+  
+  .contrat-info p {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .contrat-info ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .contrat-info ul li {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .contrat-info ul li span {
+    font-weight: bold;
+  }
+  
+
+
+  .item {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    width: 30%;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    border-radius: 5px;
+    margin-top: 20px;
+
+  }
+ 
+  .card-body {
+    padding: 1rem;
+  }
+  .card-body h5 {
+    font-size: 1.25rem;
+  }
+  .contrat-info {
+    margin-top: 1rem;
+  }
+  .contrat-info p {
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+  }
+  .contrat-info ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+  .contrat-info li {
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+  }
+  .contrat-info li span {
+    font-weight: bold;
+  }
+
+
+
+  .brand-info {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .brand-info ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .brand-info li {
+    margin-bottom: 5px;
+  }
+  
+ i {
+    margin-right: 5px;
+    color: #3498db;
+  }
+  
+
+  .accepter-button, .refuser-button {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  
+  .accepter-button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+  }
+  
+  .refuser-button {
+    background-color: #F44336;
+    color: #fff;
+    border: none;
+  }
+  
+  .accepter-button:hover, .refuser-button:hover {
+    opacity: 0.8;
+  }
+  

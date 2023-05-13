@@ -2,67 +2,17 @@
 <html lang="en">
   <head>
 
-   @include('admin.css')
 
-   <style type="text/css" >
-   .center{
-    margin: auto;
-    width: 50%;
-    border: 2px solid white;
-    text-align: center;
-    margin-top: 40px;
-   }
-
-   .font_size{
-    text-align: center;
-    font-size:40px;
-    padding-top: 20px;
-   }
-
-   .img_size{
-    width: 150px;
-    height: 150px;
-   }
-
-   .th_size{
-    background-color:skyblue;
-   }
-
-   .th_deg
-   {
-    padding: 30px;
-   }
-
-
-
-</style>
+ 
   </head>
   <body>
     <div class="container-scroller">
-      <div class="row p-0 m-0 proBanner" id="proBanner">
-        <div class="col-md-12 p-0 m-0">
-          <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
-            <div class="ps-lg-1">
-              <div class="d-flex align-items-center justify-content-between">
-                <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
-                <a href="https://www.bootstrapdash.com/product/corona-free/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
-              </div>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-              <a href="https://www.bootstrapdash.com/product/corona-free/"><i class="mdi mdi-home me-3 text-white"></i></a>
-              <button id="bannerClose" class="btn border-0 p-0">
-                <i class="mdi mdi-close text-white me-0"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+
       <!-- partial:partials/_sidebar.html -->
-      @include('admin.sidebar')
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_navbar.html -->
-      @include('admin.header')
+      @include('admin.AdminDashboard')
         <!-- partial -->
 
         <div class="main-panel">
@@ -81,46 +31,104 @@
 
                 @endif
 
-                <h1 class="font_size">All product</h1>
+                <h1 class="font_size">Product</h1>
 
-                <table class="center">
+                <div class="card card p-5" style="width: 100%">
+                    <form action="{{url('add_product')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-row" style="display: flex; row-gap:50px;">
+                          <div class="form-group col-md-6">
+                            <label for="inputEmail4">product name</label>
+                            <input type="text" name="title" class="form-control" id="inputEmail4" placeholder="Product Name">
+                          </div>
+                          <div class="form-group col-md-6" style="margin-left: 20px;" >
+                            <label for="inputPassword4">product Price</label>
+                            <input type="number" name="price" class="form-control" id="inputPassword4" placeholder="Price">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputAddress">product description</label>
+                          <input type="text" name="description" class="form-control" id="inputAddress" placeholder="description">
+                        </div>
+ 
 
+                        <div class="form-row" style="display: flex; row-gap:50px;">
+                            <div class="form-group col-md-6">
+                              <label for="inputEmail4">product quantity</label>
+                              <input type="Number" name="quantity" class="form-control" id="inputEmail4" placeholder="quantity">
+                            </div>
+                            <div class="form-group col-md-4" style="margin-left: 20px;">
+                                <label for="inputState">category</label>
+                                <select id="inputState" name="category" class="form-control">
+                                    @foreach ($category as $category )
 
-                    <tr class="th_size">
-                        <th class="th_deg">product title</th>
-                        <th class="th_deg">Description</th>
-                        <th class="th_deg">Category</th>
-                        <th class="th_deg">Price</th>
-                        <th class="th_deg">Discount</th>
-                        <th class="th_deg">Quantity</th>
-                        <th class="th_deg">Product image</th>
-                        <th class="th_deg">Delete</th>
-                        <th class="th_deg">Edit</th>
-                    </tr>
+                                    <option value="{{$category->category_name}}">{{$category->category_name}}</option>
 
-                    @foreach ($product as $product )
+                                    @endforeach
 
-                    <tr>
-                        <td>{{$product->title}}</td>
-                        <td>{{$product->description}}</td>
-                        <td>{{$product->category}}</td>
-                        <td>{{$product->price}}</td>
-                        <td>{{$product->discount_price}}</td>
-                        <td>{{$product->quantity}}</td>
-                        <td>
-                            <img src="{{asset("storage/$product->image")}}" alt="" class="img_size">
-                        </td>
-                        <td>
+                                </select>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="inputAddress">Product Image</label>
+                            <input type="file" name="image" class="form-control" id="inputAddress">
+                          </div>
+
+                        <button type="submit" class="btn btn-primary">Add Product</button>
+                      </form> 
+<div style="display: flex;" >
+                      <a class="nav-link  " href="{{url('products/export/ ')}}"> <button type="button" class="btn btn-primary">export products</button></a>
+                      <form style="margin-left: 50%" action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div style="display: flex;" >
+                        <input type="file" style="width: 20% ; height: 40%;" name="file" class="form-control">
+                        <button class="btn btn-success">Import Products</button>
+                        </div>
+                     </form>
+                  </div>
+                    <table class="table table-bordered table-striped data-table1" style="width: 80%">
+                      <thead style="font-size: 11px">
+                        <tr>
+                          <th>Product image</th>
+                          <th>ID.</th>
+                          <th>product title</th>
+                          <th>Description</th>
+                          <th>Category</th>
+                          <th>Price</th>
+                          <th>Quantity</th>
+                          <th data-type="date" data-format="YYYY/MM/DD">created date</th>
+                          <th data-type="date" data-format="YYYY/MM/DD">updated date</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody style="font-size: 12px">
+                        @foreach ($product as $product )
+                        <tr>
+                          <td><img src="{{asset("storage/$product->image")}}" alt="" style="width:50px;" ></td>
+                          <td>{{$product->id}}</td>
+                          <td>{{$product->title}}</td>
+                          <td>{{$product->description}}</td>
+                          <td>{{$product->category}}</td>
+                          <td>{{$product->price}}</td>
+                          <td>{{$product->quantity}}</td>
+                          <td>{{$product->created_at}}</td>
+                          <td>{{$product->updated_at}}</td>
+                          <td>
                             <a class="btn btn-danger" href="{{url('delete_product',$product->id)}}" onclick="return confirm('Are you sure to delete this')">Delete</a>
-                        </td>
-                        <td>
                             <a class="btn btn-success" href="{{url('update_product',$product->id)}}">Edit</a>
-                        </td>
-                    </tr>
 
-                    @endforeach
+                          </td>
+                        </tr>
+                        @endforeach
+            
+                      </tbody>
+                    </table>
+                </div>
 
-                </table>
+
+
+
 
             {{-- </div> --}}
 
@@ -130,5 +138,9 @@
     <!-- plugins:js -->
 
     @include('admin.script')
+</main>
+
+
 </body>
+
 </html>

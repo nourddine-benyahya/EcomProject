@@ -2,54 +2,16 @@
 <html lang="en">
   <head>
 
-   @include('admin.css')
 
-   <style type="text/css">
-
-   .div_center{
-    text-align: center;
-    padding-top: 40px;
-   }
-   .h1_font{
-    font-size: 40px;
-    padding-bottom: 40px;
-   }
-   .input_color{
-    color: black;
-   }
-   .center{
-    margin: auto;
-    width: 50%;
-    text-align: center;
-    margin-top: 30px;
-    border: 3px solid green;
-
-   }
-
-
-   </style>
 
   </head>
   <body>
-    <div class="container-scroller">
-      <div class="row p-0 m-0 proBanner" id="proBanner">
-        <div class="col-md-12 p-0 m-0">
-          <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center justify-content-between">
-              <a href="https://www.bootstrapdash.com/product/corona-free/"><i class="mdi mdi-home me-3 text-white"></i></a>
-              <button id="bannerClose" class="btn border-0 p-0">
-                <i class="mdi mdi-close text-white me-0"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+
       <!-- partial:partials/_sidebar.html -->
-      @include('admin.sidebar')
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_navbar.html -->
-      @include('admin.header')
+      @include('admin.AdminDashboard')
         <!-- partial -->
         <div class="main-panel">
 
@@ -69,43 +31,66 @@
 
                 <div class="div_center">
 
-                    <h1 class="h1_font">add category</h1>
 
-                    <form action="{{url('add_category')}}" method="POST">
+                    <form action="{{url('add_category')}}" method="POST" >
+                        <div class="form-group">
+                            @csrf
 
-                        @csrf
-                        <input type="text" class="input_color" name="category" placeholder="Write category name">
-                        <input type="submit" name="submit" class="btn btn-primary" value="add category">
-                    </form>
+                          <label for="exampleInputEmail1">Add Category</label>
+                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="category" required placeholder="Enter category">
+                          <small id="emailHelp" class="form-text text-muted">make sure the category not exist.</small>
+                        </div>
+                         
+                        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                      </form>
 
                 </div>
-
-                <table class="center">
-
-                    <tr>
-                        <td>Category Name</td>
-                        <td>Action</td>
-                    </tr>
-            @foreach ($data as $data )
-
-            <tr>
-                <td>{{$data->category_name}}</td>
-                <td>
-                    <a onclick="return confirm('Are you sure to delete this')" class="btn btn-danger" href="{{url('delete_category',$data->id)}}">Delete</a>
-                </td>
-            </tr>
-
-            @endforeach
-
-                </table>
 
             </div>
 
         </div>
     <!-- container-scroller -->
+
+
+    <div class="card card p-5" style="width: 100%">
+        <table class="table table-bordered table-striped data-table1" style="min-width: 100%">
+          <thead>
+            <tr>
+              <th>ID.</th>
+              <th>Category Name</th>
+              <th data-type="date" data-format="YYYY/MM/DD">created date</th>
+              <th data-type="date" data-format="YYYY/MM/DD">updated date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($data as $data )
+            <tr>
+              <td>{{$data->id}}</td>
+              <td>{{$data->category_name}}</td>
+              <td>{{$data->created_at}}</td>
+              <td>{{$data->updated_at}}</td>
+              <td><a onclick="return confirm('Are you sure to delete this')" class="btn btn-danger" href="{{url('delete_category',$data->id)}}">Delete</a>
+                <a class="btn btn-success" href="{{url('update_category',$data->id)}}">Edit</a>
+              </td>
+            </tr>
+            @endforeach
+
+          </tbody>
+        </table>
+    </div>
+
     <!-- plugins:js -->
 
-    @include('admin.script')
+   
+
+@include('admin.script')
+
+
+</main>
+
+
 </body>
+
 </html>
 
